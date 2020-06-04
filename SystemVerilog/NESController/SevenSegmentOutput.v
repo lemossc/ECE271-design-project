@@ -14,7 +14,7 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition"
-// CREATED		"Mon Jun 01 20:42:30 2020"
+// CREATED		"Wed Jun 03 20:11:21 2020"
 
 module SevenSegmentOutput(
 	count,

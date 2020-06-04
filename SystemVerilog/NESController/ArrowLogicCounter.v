@@ -14,7 +14,7 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition"
-// CREATED		"Sat May 30 16:03:02 2020"
+// CREATED		"Wed Jun 03 20:11:10 2020"
 
 module ArrowLogicCounter(
 	a,
@@ -31,35 +31,46 @@ input wire	clock;
 input wire	reset_n;
 output wire	[13:0] count;
 
+wire	a_not;
+wire	b_not;
 wire	countClockEnabled;
+wire	resetSignal;
 wire	upDown;
-wire	~a;
-wire	~b;
 wire	SYNTHESIZED_WIRE_0;
-wire	[13:0] SYNTHESIZED_WIRE_1;
+wire	[13:0] SYNTHESIZED_WIRE_4;
+wire	SYNTHESIZED_WIRE_2;
 
-assign	count = SYNTHESIZED_WIRE_1;
+assign	count = SYNTHESIZED_WIRE_4;
 
 
 
-assign	upDown = ~a & b;
+assign	upDown = a_not & b;
 
 assign	countClockEnabled = clock & SYNTHESIZED_WIRE_0;
 
-assign	SYNTHESIZED_WIRE_0 = ~b | ~a;
+assign	SYNTHESIZED_WIRE_0 = b_not | a_not;
 
-assign	~a =  ~a;
+assign	a_not =  ~a;
 
-assign	~b =  ~b;
+assign	b_not =  ~b;
 
 
 Counter	b2v_inst5(
 	.clk(countClockEnabled),
-	.reset_n(reset_n),
+	.reset_n(resetSignal),
 	.en(upDown),
-	.d(SYNTHESIZED_WIRE_1),
-	.q(SYNTHESIZED_WIRE_1));
+	.d(SYNTHESIZED_WIRE_4),
+	.q(SYNTHESIZED_WIRE_4));
 	defparam	b2v_inst5.N = 14;
+
+assign	resetSignal = reset_n & SYNTHESIZED_WIRE_2;
+
+
+Comparator	b2v_inst7(
+	.a(SYNTHESIZED_WIRE_4),
+	.lt(SYNTHESIZED_WIRE_2));
+	defparam	b2v_inst7.M = 16383;
+	defparam	b2v_inst7.N = 14;
 
 
 endmodule

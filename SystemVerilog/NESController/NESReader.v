@@ -14,7 +14,7 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition"
-// CREATED		"Sat May 30 16:54:12 2020"
+// CREATED		"Wed Jun 03 20:10:56 2020"
 
 module NESReader(
 	data,
@@ -48,7 +48,7 @@ output wire	a;
 output wire	b;
 
 wire	[7:0] buttons;
-wire	[3:0] SYNTHESIZED_WIRE_4;
+wire	[3:0] count;
 
 
 
@@ -58,19 +58,19 @@ Counter	b2v_inst(
 	.clk(clock),
 	.reset_n(reset_n),
 	.en(reset_n),
-	.d(SYNTHESIZED_WIRE_4),
-	.q(SYNTHESIZED_WIRE_4));
+	.d(count),
+	.q(count));
 	defparam	b2v_inst.N = 4;
 
 
 NESLatchStateDecoder	b2v_inst1(
-	.controllerState(SYNTHESIZED_WIRE_4),
+	.controllerState(count),
 	.NESLatch(latchOrange));
 	defparam	b2v_inst1.N = 4;
 
 
 NESClockStateDecoder	b2v_inst2(
-	.controllerState(SYNTHESIZED_WIRE_4),
+	.controllerState(count),
 	.NESClock(clockRed));
 	defparam	b2v_inst2.N = 4;
 
@@ -78,7 +78,7 @@ NESClockStateDecoder	b2v_inst2(
 NESDataReceiverDecoder	b2v_inst3(
 	.data(data),
 	.reset_n(reset_n),
-	.controllerState(SYNTHESIZED_WIRE_4),
+	.controllerState(count),
 	.readButtons(buttons));
 	defparam	b2v_inst3.N = 4;
 

@@ -1,4 +1,4 @@
-module Parser#(parameter N = 10)
+module Parser#(parameter N = 14)
 				  (input  logic [N-1:0] value,
 					output logic [3:0] ones, tens, hundreds, thousands, tenThousands);
     

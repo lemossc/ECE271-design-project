@@ -14,75 +14,123 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition"
-// CREATED		"Sat May 30 17:31:59 2020"
+// CREATED		"Wed Jun 03 20:29:25 2020"
 
 module NESController(
 	reset_n,
 	data,
-	clock_10MHz
+	clock_10MHz,
+	Seg0,
+	Seg1,
+	Seg2,
+	Seg3,
+	Seg4
 );
 
 
 input wire	reset_n;
 input wire	data;
 input wire	clock_10MHz;
+output wire	[6:0] Seg0;
+output wire	[6:0] Seg1;
+output wire	[6:0] Seg2;
+output wire	[6:0] Seg3;
+output wire	[6:0] Seg4;
 
-wire	clock;
-wire	clock_128Hz;
-wire	clock_16Hz;
-wire	clock_2KHz;
-wire	clock_32Hz;
+wire	a;
+wire	b;
+wire	clock_1280Hz;
+wire	clock_160Hz;
+wire	clock_20Hz;
+wire	clock_2560Hz;
+wire	clock_40Hz;
 wire	clockRed;
-wire	count;
+wire	[13:0] count;
 wire	countClock;
-wire	latchOrange;
+wire	down;
+wire	latchData;
+wire	left;
+wire	right;
 wire	select;
 wire	start;
-wire	SYNTHESIZED_WIRE_0;
-wire	SYNTHESIZED_WIRE_1;
-wire	SYNTHESIZED_WIRE_2;
-wire	SYNTHESIZED_WIRE_3;
-wire	SYNTHESIZED_WIRE_4;
-wire	SYNTHESIZED_WIRE_5;
+wire	up;
 
 
 
 
 
 NESReader	b2v_inst(
-	.clock(clock),
+	.clock(clock_10MHz),
 	.reset_n(reset_n),
 	.data(data),
 	
 	
-	.up(SYNTHESIZED_WIRE_0),
-	.down(SYNTHESIZED_WIRE_1),
-	.left(SYNTHESIZED_WIRE_2),
-	.right(SYNTHESIZED_WIRE_3),
+	.up(up),
+	.down(down),
+	.left(left),
+	.right(right),
 	
 	
-	.a(SYNTHESIZED_WIRE_4),
-	.b(SYNTHESIZED_WIRE_5));
+	.a(a),
+	.b(b));
+
+
+ClockDivider	b2v_inst1(
+	.clock_10MHz(clock_10MHz),
+	.reset_n(reset_n),
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	.clock_2560Hz(clock_2560Hz),
+	
+	
+	
+	.clock_160Hz(clock_160Hz),
+	
+	.clock_40Hz(clock_40Hz),
+	.clock_20Hz(clock_20Hz)
+	
+	
+	
+	);
+
+
+SevenSegmentOutput	b2v_inst2(
+	.count(count),
+	.hundredsSeg(Seg2),
+	.onesSeg(Seg0),
+	.tensSeg(Seg1),
+	.tenThousandsSeg(Seg4),
+	.thousandsSeg(Seg3));
 
 
 ClockSelect	b2v_inst3(
-	.up(SYNTHESIZED_WIRE_0),
-	.down(SYNTHESIZED_WIRE_1),
-	.left(SYNTHESIZED_WIRE_2),
-	.right(SYNTHESIZED_WIRE_3),
-	.clock0(clock_16Hz),
-	.clock1(clock_32Hz),
-	.clock2(clock_128Hz),
-	.clock3(clock_2KHz),
+	.up(up),
+	.down(down),
+	.left(left),
+	.right(right),
+	.clock0(clock_20Hz),
+	.clock1(clock_40Hz),
+	.clock2(clock_160Hz),
+	.clock3(clock_2560Hz),
 	.selectedClock(countClock));
 
 
 ArrowLogicCounter	b2v_inst4(
 	.clock(countClock),
 	.reset_n(reset_n),
-	.a(SYNTHESIZED_WIRE_4),
-	.b(SYNTHESIZED_WIRE_5)
-	);
+	.a(a),
+	.b(b),
+	.count(count));
 
 
 endmodule
