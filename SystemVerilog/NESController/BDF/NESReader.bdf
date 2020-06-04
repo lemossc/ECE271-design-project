@@ -23,7 +23,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect 32 112 200 128)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "data" (rect 5 0 27 12)(font "Arial" ))
+	(text "data" (rect 5 0 26 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -39,7 +39,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect 32 64 200 80)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "clock" (rect 5 0 30 17)(font "Intel Clear" ))
+	(text "clock" (rect 5 0 29 17)(font "Intel Clear" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -55,7 +55,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect 32 80 200 96)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "reset_n" (rect 5 0 41 17)(font "Intel Clear" ))
+	(text "reset_n" (rect 5 0 40 17)(font "Intel Clear" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -395,16 +395,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 480 72)
-	(pt 488 72)
-	(bus)
-)
-(connector
-	(pt 488 72)
-	(pt 528 72)
-	(bus)
-)
-(connector
 	(pt 528 72)
 	(pt 552 72)
 	(bus)
@@ -558,6 +548,17 @@ refer to the applicable agreement for further details.
 	(text "buttons[0]" (rect 850 216 898 233)(font "Intel Clear" ))
 	(pt 840 232)
 	(pt 904 232)
+)
+(connector
+	(pt 488 72)
+	(pt 528 72)
+	(bus)
+)
+(connector
+	(text "count[3..0]" (rect 432 56 481 73)(font "Intel Clear" ))
+	(pt 480 72)
+	(pt 488 72)
+	(bus)
 )
 (junction (pt 488 72))
 (junction (pt 528 72))
