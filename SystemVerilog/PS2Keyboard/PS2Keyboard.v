@@ -14,12 +14,14 @@
 
 // PROGRAM		"Quartus Prime"
 // VERSION		"Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition"
-// CREATED		"Wed Jun 03 16:27:09 2020"
+// CREATED		"Thu Jun 04 20:24:00 2020"
 
 module PS2Keyboard(
-	clock,
 	data,
 	pulseClock,
+	clock,
+	switchesX,
+	switchesY,
 	vSync,
 	hSync,
 	blue,
@@ -28,79 +30,83 @@ module PS2Keyboard(
 );
 
 
-input wire	clock;
 input wire	data;
 input wire	pulseClock;
+input wire	clock;
+input wire	[1:0] switchesX;
+input wire	[1:0] switchesY;
 output wire	vSync;
 output wire	hSync;
 output wire	[3:0] blue;
 output wire	[3:0] green;
 output wire	[3:0] red;
 
+wire	[3:0] blueBoxUnit;
+wire	[9:0] BOX_SIZE;
+wire	[9:0] boxX;
+wire	[9:0] boxY;
 wire	clockHalf;
+wire	[3:0] greenBoxUnit;
 wire	horizontalSync;
+wire	[1:0] moveX;
+wire	[1:0] moveY;
+wire	[3:0] redBoxUnit;
 wire	verticalSync;
-wire	[9:0] xCurrent;
-wire	[9:0] yCurrent;
-wire	[1:0] SYNTHESIZED_WIRE_0;
-wire	[1:0] SYNTHESIZED_WIRE_1;
-wire	[3:0] SYNTHESIZED_WIRE_2;
-wire	[9:0] SYNTHESIZED_WIRE_3;
-wire	[9:0] SYNTHESIZED_WIRE_4;
-wire	[9:0] SYNTHESIZED_WIRE_5;
-wire	[3:0] SYNTHESIZED_WIRE_6;
-wire	[3:0] SYNTHESIZED_WIRE_7;
+wire	[9:0] xPos;
+wire	[9:0] yPos;
 
 
 
 
 
-BoxUnit	b2v_inst(
-	.vSync(verticalSync),
-	.moveX(SYNTHESIZED_WIRE_0),
-	.moveY(SYNTHESIZED_WIRE_1),
-	.blue(SYNTHESIZED_WIRE_2),
-	.boxSize(SYNTHESIZED_WIRE_3),
-	.boxX(SYNTHESIZED_WIRE_4),
-	.boxY(SYNTHESIZED_WIRE_5),
-	.green(SYNTHESIZED_WIRE_6),
-	.red(SYNTHESIZED_WIRE_7));
-	defparam	b2v_inst.BOX_SIZE = 40;
-
-
-BoxDrawer	b2v_inst4(
+BoxDrawer	b2v_BoxDrawer(
 	.clock(clockHalf),
-	.blue(SYNTHESIZED_WIRE_2),
-	.boxSize(SYNTHESIZED_WIRE_3),
-	.boxX(SYNTHESIZED_WIRE_4),
-	.boxY(SYNTHESIZED_WIRE_5),
-	.green(SYNTHESIZED_WIRE_6),
-	.red(SYNTHESIZED_WIRE_7),
-	.x(xCurrent),
-	.y(yCurrent),
+	.blue(blueBoxUnit),
+	.BOX_SIZE(BOX_SIZE),
+	.boxX(boxX),
+	.boxY(boxY),
+	.green(greenBoxUnit),
+	.red(redBoxUnit),
+	.x(xPos),
+	.y(yPos),
 	.b(blue),
 	.g(green),
 	.r(red));
+	defparam	b2v_BoxDrawer.RES_HEIGHT = 480;
+	defparam	b2v_BoxDrawer.RES_WIDTH = 640;
 
 
-VGATimingLogic	b2v_inst5(
-	.clock(clockHalf),
+BoxUnit	b2v_BoxUnit(
 	.vSync(verticalSync),
-	.hSync(horizontalSync),
-	.x(xCurrent),
-	.y(yCurrent));
+	.moveX(moveX),
+	.moveY(moveY),
+	.blue(blueBoxUnit),
+	.BOX_SIZE(BOX_SIZE),
+	.boxX(boxX),
+	.boxY(boxY),
+	.green(greenBoxUnit),
+	.red(redBoxUnit));
+	defparam	b2v_BoxUnit.BOX__SIZE = 40;
 
 
-ClockDivider	b2v_inst6(
+ClockDivider	b2v_ClockDivider(
 	.clock(clock),
 	.clockDivided(clockHalf));
 
 
-KeyboardWASD	b2v_inst7(
+VGATimingLogic	b2v_inst(
+	.clock(clockHalf),
+	.vSync(verticalSync),
+	.hSync(horizontalSync),
+	.x(xPos),
+	.y(yPos));
+
+
+KeyboardWASD	b2v_KeyboardWASD(
 	.clock(pulseClock),
 	.data(data),
-	.x(SYNTHESIZED_WIRE_0),
-	.y(SYNTHESIZED_WIRE_1));
+	.leftRightOutput(moveX),
+	.upDownOutput(moveY));
 
 assign	vSync = verticalSync;
 assign	hSync = horizontalSync;

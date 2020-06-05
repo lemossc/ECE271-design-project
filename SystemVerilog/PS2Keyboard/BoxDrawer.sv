@@ -1,10 +1,11 @@
 // BoxDrawer: Draws a box with given colors on a VGA monitor.
-module BoxDrawer(input  logic clock,
+module BoxDrawer#(parameter RES_WIDTH = 640, RES_HEIGHT = 480)
+					 (input  logic clock,
 					  input  logic [3:0] red, green, blue,
-					  input  logic [9:0] boxX, boxY, boxSize, x, y,
+					  input  logic [9:0] boxX, boxY, BOX_SIZE, x, y,
 					  output logic [3:0] r, g, b);
 				 
-	localparam RES_WIDTH = 640, RES_HEIGHT = 480;
+//	localparam RES_WIDTH = 640, RES_HEIGHT = 480;
 	
 	// Valid location logic variables (in monitor resolution and within domain of the box)
 	//logic inMonitorResolution = 0, minBoxDomainCriterion = 0, maxBoxDomainCriterion = 0;
@@ -14,11 +15,11 @@ module BoxDrawer(input  logic clock,
 	
 		// inMonitorResolution 	<= (x < RES_WIDTH) && (y < RES_HEIGHT);
 		// minBoxDomainCriterion <= (x > boxX) && (y > boxY);
-		// maxBoxDomainCriterion <= (x < boxX + boxSize) && (y < boxY + boxSize);
+		// maxBoxDomainCriterion <= (x < boxX + BOX_SIZE) && (y < boxY + BOX_SIZE);
 		
 		if ((x < RES_WIDTH) && (y < RES_HEIGHT) && 
 			 (x > boxX) && (y > boxY) && 
-			 (x < boxX + boxSize) && (y < boxY + boxSize)) 
+			 (x < boxX + BOX_SIZE) && (y < boxY + BOX_SIZE)) 
 			begin
 				r <= red;
 				g <= green;
