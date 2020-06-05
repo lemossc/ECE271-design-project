@@ -20,7 +20,7 @@ refer to the applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 192 224)
+	(rect 16 16 208 224)
 	(text "BoxDrawer" (rect 5 0 49 12)(font "Arial" ))
 	(text "inst" (rect 8 192 20 204)(font "Arial" ))
 	(port
@@ -68,8 +68,8 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 0 128)
 		(input)
-		(text "boxSize[9..0]" (rect 0 0 49 12)(font "Arial" ))
-		(text "boxSize[9..0]" (rect 21 123 70 135)(font "Arial" ))
+		(text "BOX_SIZE[9..0]" (rect 0 0 67 12)(font "Arial" ))
+		(text "BOX_SIZE[9..0]" (rect 21 123 88 135)(font "Arial" ))
 		(line (pt 0 128)(pt 16 128)(line_width 3))
 	)
 	(port
@@ -87,27 +87,38 @@ refer to the applicable agreement for further details.
 		(line (pt 0 160)(pt 16 160)(line_width 3))
 	)
 	(port
-		(pt 176 32)
+		(pt 192 32)
 		(output)
 		(text "r[3..0]" (rect 0 0 23 12)(font "Arial" ))
-		(text "r[3..0]" (rect 132 27 155 39)(font "Arial" ))
-		(line (pt 176 32)(pt 160 32)(line_width 3))
+		(text "r[3..0]" (rect 148 27 171 39)(font "Arial" ))
+		(line (pt 192 32)(pt 176 32)(line_width 3))
 	)
 	(port
-		(pt 176 48)
+		(pt 192 48)
 		(output)
 		(text "g[3..0]" (rect 0 0 24 12)(font "Arial" ))
-		(text "g[3..0]" (rect 131 43 155 55)(font "Arial" ))
-		(line (pt 176 48)(pt 160 48)(line_width 3))
+		(text "g[3..0]" (rect 147 43 171 55)(font "Arial" ))
+		(line (pt 192 48)(pt 176 48)(line_width 3))
 	)
 	(port
-		(pt 176 64)
+		(pt 192 64)
 		(output)
 		(text "b[3..0]" (rect 0 0 24 12)(font "Arial" ))
-		(text "b[3..0]" (rect 131 59 155 71)(font "Arial" ))
-		(line (pt 176 64)(pt 160 64)(line_width 3))
+		(text "b[3..0]" (rect 147 59 171 71)(font "Arial" ))
+		(line (pt 192 64)(pt 176 64)(line_width 3))
 	)
+	(parameter
+		"RES_WIDTH"
+		"640"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"RES_HEIGHT"
+		"480"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 160 192)(line_width 1))
+		(rectangle (rect 16 16 176 192)(line_width 1))
 	)
+	(annotation_block (parameter)(rect 208 -64 308 16))
 )

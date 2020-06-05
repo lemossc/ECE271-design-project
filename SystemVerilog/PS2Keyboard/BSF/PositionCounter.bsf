@@ -44,7 +44,18 @@ refer to the applicable agreement for further details.
 		(text "y[9..0]" (rect 98 43 123 55)(font "Arial" ))
 		(line (pt 144 48)(pt 128 48)(line_width 3))
 	)
+	(parameter
+		"H_MAX"
+		"800"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"V_MAX"
+		"525"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
 		(rectangle (rect 16 16 128 64)(line_width 1))
 	)
+	(annotation_block (parameter)(rect 160 -64 260 16))
 )
